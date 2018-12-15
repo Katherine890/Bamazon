@@ -22,6 +22,6 @@ Users may get started by first typing "node bamazonCustomer.js" into the command
 [GitHub](https://github.com/Katherine890/bamazon)
 
 ## DEMO
-SUCCESSFUL ORDER: https://drive.google.com/file/d/1ORGgUpy8pvSYtMgUyARmPrsw7QqFk7vE/view
+SUCCESSFUL ORDER: https://drive.google.com/file/d/1ORGgUpy8pvSYtMgUyARmPrsw7QqFk7vE/view  \
 UNSUCCESSFUL ORDER: https://drive.google.com/file/d/1QrEJhCPsnUbYG6CQbnPrGapaKtiX2SVS/view
 
