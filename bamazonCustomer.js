@@ -81,7 +81,7 @@ function start() {
                 }
                 // console.log(answer.chosen_Quantity);
                 //console.log(chosenItem);
-               // if (parseInt(answer.chosen_Quantity) < newcurrentItem[0].stock_quantity) {
+                if (parseInt(answer.chosen_Quantity) < newcurrentItem[0].stock_quantity) {
                   //  console.log(parseInt(answer.chosen_Quantity) < newcurrentItem[0].stock_quantity);
                     // There is enough quantity, update the db.
                     console.log("at second query");
@@ -106,12 +106,12 @@ function start() {
                         }
                         // );
                     )
-               // }
-               //   else {
+                }
+                  else {
                 // Not enough products in stock
-               //         console.log("INSUFFICIENT QUANTITY!");
+                        console.log("INSUFFICIENT QUANTITY!");
                 //start();
-               //  }
+                 }
 
 
                 //}
