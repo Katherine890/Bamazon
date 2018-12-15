@@ -13,7 +13,7 @@ Bamazon operates through node.js and the mysql database. Mysql provides the inve
 
 
 ## Getting Started
-Users may get started by first typing "node bamazonCustomer.js" into the command line. The terminal will display a list of items along with their id number and price. The terminal will then prompt the user the id of the product they would like to buy. Following, the user will be asked the number of units of the product they would like to buy. Node will then search the mysql database for the stock quantity of that item and check if there is enough of the product available in stock. If there is, the order will be processed and the terminal will display the user's total price.
+Users may get started by first typing "node bamazonCustomer.js" into the command line. The terminal will display a list of items along with their id number and price. The terminal will then prompt the user the id of the product they would like to buy. Following, the user will be asked the number of units of the product they would like to buy. Node will then search the mysql database for the stock quantity of that item and check if there is enough of the product available in stock. If there is, the order will be processed and the terminal will display the user's total price. If there are not enough products to meet the user's request, the user will get a response "INSUFFICIENT QUANTITY!" and their order will be denied.
  
 
 

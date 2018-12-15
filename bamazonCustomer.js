@@ -22,7 +22,6 @@ var chosenItem;    // chosen item
 function start() {
     connection.query("SELECT item_id, product_name, price FROM products", function (err, res) {
         if (err) throw err;
-        // console.table(JSON.stringify(res, null, 2));
         console.table(res);
         inquirer
             .prompt([
@@ -56,17 +55,14 @@ function start() {
 
             ])
             .then(function (answer) {
-                //  console.log(answer);
+                var newcurrentItem;
+
                 //get info for the chosen product id
                 for (var i = 0; i < res.length; i++) {
                     if (res[i].item_id == answer.productId) {
                         chosenItem = res[i];
-                        //console.log("chosenItem1", chosenItem);
-                        currentitemId = res[i].item_id;
-                        console.log(currentitemId);
+                        currentitemId = res[i].item_id;   // The current id we choose
 
-                        // console.log(answer.productId);
-                        var newcurrentItem; // create a variable with the item that includes stock_quantity
                         connection.query(
                             "SELECT * FROM products", function (err, res) {
                                 if (err) throw err;
@@ -74,50 +70,44 @@ function start() {
                                     return item.item_id === currentitemId;
 
                                 })
-                                console.log("chosenItem2", newcurrentItem[0].stock_quantity);
+                               // console.log("chosenItem2", newcurrentItem[0].stock_quantity);
+
+                                if (parseInt(answer.chosen_Quantity) < newcurrentItem[0].stock_quantity) {
+
+                                    // There is enough quantity, update the db.
+                                        connection.query(
+                                        "UPDATE products SET ? WHERE ?",
+                                        [
+                                            {
+                                                stock_quantity: newcurrentItem[0].stock_quantity - answer.chosen_Quantity
+                                            },
+                                            {
+                                                item_id: chosenItem.item_id
+                                            }
+                                        ],
+                                        function (error) {
+                                            if (error) throw err;
+                                            var totalPrice = (newcurrentItem[0].price * answer.chosen_Quantity)
+                                            console.log("ORDER PROCESSED!");
+                                            console.log(chosenItem);
+                                            console.log("YOUR TOTAL IS:" + totalPrice)
+                                            start();
+                                        }
+                                        // );
+                                    )
+                                }
+                                else {
+                                    // Not enough products in stock
+                                    console.log("INSUFFICIENT QUANTITY!");
+                                    start();
+                                }
+
+
                             }
                         )
                     }
                 }
-                // console.log(answer.chosen_Quantity);
-                //console.log(chosenItem);
-                if (parseInt(answer.chosen_Quantity) < newcurrentItem[0].stock_quantity) {
-                  //  console.log(parseInt(answer.chosen_Quantity) < newcurrentItem[0].stock_quantity);
-                    // There is enough quantity, update the db.
-                    console.log("at second query");
 
-                    connection.query(
-                        "UPDATE products SET ? WHERE ?",
-                        [
-                            {
-                                stock_quantity: stock_quantity - answer.chosen_Quantity
-                            },
-                            {
-                                item_id: chosenItem.item_id
-                            }
-                        ],
-                        function (error) {
-                            if (error) throw err;
-                            var totalPrice = (chosenItem[0].price * answer.chosen_Quantity)
-                            console.log("ORDER PROCESSED!");
-                            console.log("YOUR TOTAL IS:" + totalPrice)
-                            console.log(chosenItem);
-                            //  start();
-                        }
-                        // );
-                    )
-                }
-                  else {
-                // Not enough products in stock
-                        console.log("INSUFFICIENT QUANTITY!");
-                //start();
-                 }
-
-
-                //}
-
-
-                //}
             })
 
 
